@@ -31,4 +31,4 @@
   copy: src=drunomics_rsyslog dest=/etc/init.d/drunomics_rsyslog owner=root group=root mode=0554
 
 - name: Start rsyslog via rc.local
-  lineinfile: dest=/etc/rc.local line="/etc/init.d/drunomics_rsyslog" state=present
+  lineinfile: dest=/etc/rc.local line="/etc/init.d/drunomics_rsyslog" insertbefore="exit 0" state=present
