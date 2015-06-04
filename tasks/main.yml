@@ -25,3 +25,10 @@
   with_items:
     - unattended-upgrades
   when: base_is_server
+
+# Fix for rsyslogd not running at container start.
+- name: Copy custom rsyslogd start script
+  copy: src=drunomics_rsyslog dest=/etc/init.d/drunomics_rsyslog owner=root group=root mode=0554
+
+- name: Update /etc/hosts via rc.local on container start
+  lineinfile: dest=/etc/rc.local line="/etc/init.d/drunomics_rsyslog" state=present
