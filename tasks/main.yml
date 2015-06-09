@@ -28,7 +28,8 @@
 
 # Fix for rsyslogd not running at container start.
 - name: Copy custom rsyslogd start script
-  copy: src=drunomics_rsyslog dest=/etc/init.d/drunomics_rsyslog owner=root group=root mode=0554
-
-- name: Start rsyslog via rc.local
-  lineinfile: dest=/etc/rc.local line="/etc/init.d/drunomics_rsyslog" insertbefore="exit 0" state=present
+  copy: src="{{ item.src }}" dest="{{ item.dest }}" owner=root group=root mode=0554 force=yes
+  with_items:
+    - { src: "drunomics_rsyslog", dest: "/etc/init.d/rsyslog" }
+    - { src: "lib-init-init-d-script", dest: "/lib/init/init-d-script" }
+  when: base_rsyslogd_custom_init == "true"
