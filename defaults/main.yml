@@ -2,4 +2,3 @@
 
 base_is_server: false
 base_apt_packages_extra: []
-base_rsyslogd_custom_init: false
