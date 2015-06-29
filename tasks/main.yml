@@ -9,6 +9,9 @@
     - python-software-properties
     - htop
 
+- name: Make sure /dev/xconsole is there for rsyslog
+  command: mknod -m 640 /dev/xconsole p && chown root:adm /dev/xconsole || echo "/dev/xconsole already exists."
+
 - name: Install extra packages.
   action: apt pkg="{{ item }}" state=present
   with_items: base_apt_packages_extra
@@ -25,11 +28,3 @@
   with_items:
     - unattended-upgrades
   when: base_is_server
-
-# Fix for rsyslogd not running at container start.
-- name: Copy custom rsyslogd start script
-  copy: src="{{ item.src }}" dest="{{ item.dest }}" owner=root group=root mode=0554 force=yes
-  with_items:
-    - { src: "drunomics_rsyslog", dest: "/etc/init.d/rsyslog" }
-    - { src: "lib-init-init-d-script", dest: "/lib/init/init-d-script" }
-  when: base_rsyslogd_custom_init == "true"
