@@ -10,7 +10,7 @@
     - htop
 
 - name: Make sure /dev/xconsole is there for rsyslog
-  command: mknod -m 640 /dev/xconsole p && chown root:adm /dev/xconsole || echo "/dev/xconsole already exists."
+  shell: mknod -m 640 /dev/xconsole p && chown root:adm /dev/xconsole || echo /dev/xconsole already exists.
 
 - name: Install extra packages.
   action: apt pkg="{{ item }}" state=present
