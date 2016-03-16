@@ -28,3 +28,13 @@
   with_items:
     - unattended-upgrades
   when: base_is_server
+
+- name: Set timezone variables
+  copy: content="{{ base_timezone }}"
+        dest=/etc/timezone
+        owner=root
+        group=root
+        mode=0644
+        backup=yes
+  notify:
+    - Update timezone
