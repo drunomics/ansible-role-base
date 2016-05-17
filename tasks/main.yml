@@ -14,7 +14,7 @@
 
 - name: Install extra packages.
   action: apt pkg="{{ item }}" state=present
-  with_items: base_apt_packages_extra
+  with_items: "{{ base_apt_packages_extra }}"
 
 - name: Ansible motd
   action: template src=etc-update-motd-d-95-ansible.j2 dest=/etc/update-motd.d/95-ansible mode=755
