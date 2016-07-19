@@ -29,7 +29,7 @@
 
 - name: Set timezone variables
   copy: >
-    content="{{ base_timezone }}"
+    content="{{ base_timezone }}\n"
     dest=/etc/timezone
     owner=root
     group=root
