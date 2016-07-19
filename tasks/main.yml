@@ -1,16 +1,14 @@
 ---
+- name: "Add settings per ubuntu release"
+  include_vars: "{{ ansible_distribution_release }}.yml"
+
 - name: Install packages.
   action: apt pkg="{{ item }}" state=present
-  with_items:
-    - rsyslog
-    - vim
-    - unzip
-    - curl
-    - python-software-properties
-    - htop
+  with_items: "{{ base_apt_packages_default }}"
 
 - name: Make sure /dev/xconsole is there for rsyslog
   shell: mknod -m 640 /dev/xconsole p && chown root:adm /dev/xconsole || echo /dev/xconsole already exists.
+  when: ansible_distribution_release == 'trusty'
 
 - name: Install extra packages.
   action: apt pkg="{{ item }}" state=present
@@ -30,11 +28,12 @@
   when: base_is_server
 
 - name: Set timezone variables
-  copy: content="{{ base_timezone }}"
-        dest=/etc/timezone
-        owner=root
-        group=root
-        mode=0644
-        backup=yes
+  copy: >
+    content="{{ base_timezone }}"
+    dest=/etc/timezone
+    owner=root
+    group=root
+    mode=0644
+    backup=yes
   notify:
     - Update timezone
