@@ -2,6 +2,9 @@
 - name: "Add settings per ubuntu release"
   include_vars: "{{ ansible_distribution_release }}.yml"
 
+- name: Update apt-cache
+  apt: update_cache=yes cache_valid_time=86400
+
 - name: Install packages.
   action: apt pkg="{{ item }}" state=present
   with_items: "{{ base_apt_packages_default }}"
