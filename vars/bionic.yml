@@ -1,0 +1,8 @@
+# Holds distribution release specific vars.
+---
+base_apt_packages_default:
+  - rsyslog
+  - vim
+  - unzip
+  - curl
+  - htop
