@@ -40,3 +40,59 @@
     backup=yes
   notify:
     - Update timezone
+
+- name: Modify (Increase) soft nproc
+  pam_limits:
+    domain: drunomics
+    limit_type: soft
+    limit_item: nproc
+    value: 64000
+    
+- name: Modify (Increase) hard nproc
+  pam_limits:
+    domain: drunomics
+    limit_type: hard
+    limit_item: nproc
+    value: 64000
+    
+- name: Modify (Increase) soft nofile
+  pam_limits:
+    domain: drunomics
+    limit_type: soft
+    limit_item: nofile
+    value: 64000
+    
+- name: Modify (Increase) hard nofile
+  pam_limits:
+    domain: drunomics
+    limit_type: hard
+    limit_item: nofile
+    value: 64000
+
+- name: Modify (Increase) soft nproc root
+  pam_limits:
+    domain: root
+    limit_type: soft
+    limit_item: nproc
+    value: 64000
+    
+- name: Modify (Increase) hard nproc root
+  pam_limits:
+    domain: root
+    limit_type: hard
+    limit_item: nproc
+    value: 64000
+    
+- name: Modify (Increase) soft nofile root
+  pam_limits:
+    domain: root
+    limit_type: soft
+    limit_item: nofile
+    value: 64000
+    
+- name: Modify (Increase) hard nofile root
+  pam_limits:
+    domain: root
+    limit_type: hard
+    limit_item: nofile
+    value: 64000
