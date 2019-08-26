@@ -42,57 +42,66 @@
     - Update timezone
 
 - name: Modify (Increase) soft nproc
+  when: base_is_server
   pam_limits:
     domain: drunomics
     limit_type: soft
     limit_item: nproc
-    value: 64000
+    value: {{ base_max_openfiles }}
+
     
 - name: Modify (Increase) hard nproc
+  when: base_is_server
   pam_limits:
     domain: drunomics
     limit_type: hard
     limit_item: nproc
-    value: 64000
+    value: {{ base_max_openfiles }}
     
 - name: Modify (Increase) soft nofile
+  when: base_is_server
   pam_limits:
     domain: drunomics
     limit_type: soft
     limit_item: nofile
-    value: 64000
+    value: {{ base_max_openfiles }}
     
 - name: Modify (Increase) hard nofile
+  when: base_is_server
   pam_limits:
     domain: drunomics
     limit_type: hard
     limit_item: nofile
-    value: 64000
+    value: {{ base_max_openfiles }}
 
 - name: Modify (Increase) soft nproc root
+  when: base_is_server
   pam_limits:
     domain: root
     limit_type: soft
     limit_item: nproc
-    value: 64000
+    value: {{ base_max_openfiles }}
     
 - name: Modify (Increase) hard nproc root
+  when: base_is_server
   pam_limits:
     domain: root
     limit_type: hard
     limit_item: nproc
-    value: 64000
+    value: {{ base_max_openfiles }}
     
 - name: Modify (Increase) soft nofile root
+  when: base_is_server
   pam_limits:
     domain: root
     limit_type: soft
     limit_item: nofile
-    value: 64000
+    value: {{ base_max_openfiles }}
     
 - name: Modify (Increase) hard nofile root
+  when: base_is_server
   pam_limits:
     domain: root
     limit_type: hard
     limit_item: nofile
-    value: 64000
+    value: {{ base_max_openfiles }}
