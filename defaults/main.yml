@@ -3,3 +3,4 @@
 base_is_server: false
 base_apt_packages_extra: []
 base_timezone: Europe/Vienna
+base_max_openfiles: 64000
