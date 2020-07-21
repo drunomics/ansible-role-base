@@ -1,0 +1,6 @@
+# Holds distribution release specific vars.
+---
+base_apt_packages_default:
+  - vim
+  - curl
+  - htop
